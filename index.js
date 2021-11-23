@@ -131,7 +131,17 @@ async function run(){
             res.send(result);
         })
         // ORDER STATUS UPDATE 
-        
+        app.put("/statusUpdate/:id", async (req, res) => {
+            const filter = { _id: ObjectId(req.params.id) };
+            console.log(req.params.id);
+            const result = await bookedProductsCollection.updateOne(filter, {
+              $set: {
+                status: req.body.status,
+              },
+            });
+            res.send(result);
+            console.log(result);
+          });
         
 
     }
